@@ -1,2 +1,2 @@
-# spotdog_8dof_22_10
-spotdog_8dof
+# Spotdog
+spotdog_8dof closed_loop mechanism with ROS. 
