@@ -1,0 +1,41 @@
+spotdog:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+  
+  fr_hip_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_to_fr_upper_hip
+    pid: {p: 10, i: 0.01, d: 1}
+  br_hip_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_to_br_upper_hip
+    pid: {p: 10, i: 0.01, d: 1}
+  
+  fl_hip_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_to_fl_upper_hip
+    pid: {p: 10, i: 0.01, d: 1}
+  bl_hip_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_to_bl_upper_hip
+    pid: {p: 10, i: 0.01, d: 1}
+
+  fr_knee_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_to_fr_upper_knee
+    pid: {p: 10, i: 0.01, d: 1}
+  br_knee_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_to_br_upper_knee
+    pid: {p: 10, i: 0.01, d: 1}
+  
+  fl_knee_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_to_fl_upper_knee
+    pid: {p: 10, i: 0.01, d: 1}
+  bl_knee_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_to_bl_upper_knee
+    pid: {p: 10, i: 0.01, d: 1}
+  

@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="spotdog">
+    <xacro:include filename="$(find spotdog)/xacro/link/base.xacro"/>
+    <xacro:include filename="$(find spotdog)/xacro/link/leg.xacro"/>
+    <xacro:include filename="$(find spotdog)/xacro/joint/joint_to_joint.xacro"/>
+    <xacro:include filename="$(find spotdog)/xacro/transmission/transmission.xacro"/>
+
+    <xacro:base_link name="BASE"/>
+
+    <link name="dummy_link"/>
+    <joint name="base_to_dummy_link" type="fixed">
+        <parent link="dummy_link"/>
+        <child link="BASE"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <xacro:upper_hip name="FR" origin_xyz="-0.063662 -0.0047809 -0.019753" mass="0.2" filename="package://spotdog/meshes/FR_upper_hip.STL"/>
+    <xacro:upper_hip name="BR" origin_xyz="-0.063661 -0.0047809 -0.019757" mass="0.2" filename="package://spotdog/meshes/BR_upper_hip.STL"/>
+    <xacro:upper_hip name="FL" origin_xyz="-0.063662 0.0047809 -0.019753" mass="0.2" filename="package://spotdog/meshes/FL_upper_hip.STL"/>
+    <xacro:upper_hip name="BL" origin_xyz="-0.063661 0.0047809 -0.019757" mass="0.2" filename="package://spotdog/meshes/BL_upper_hip.STL"/>
+
+
+    <xacro:upper_knee name="FR" origin_xyz="0.050518 -0.0047809 -0.043485" mass="0.2" filename="package://spotdog/meshes/FR_upper_knee.STL"/>
+    <xacro:upper_knee name="BR" origin_xyz="0.050516 -0.0047809 -0.043487" mass="0.2" filename="package://spotdog/meshes/BR_upper_knee.STL"/>
+    <xacro:upper_knee name="FL" origin_xyz="0.050518 0.0047809 -0.043485" mass="0.2" filename="package://spotdog/meshes/FL_upper_knee.STL"/>
+    <xacro:upper_knee name="BL" origin_xyz="0.050516 0.0047809 -0.043487" mass="0.2" filename="package://spotdog/meshes/BL_upper_knee.STL"/>
+
+
+    <xacro:lower_hip name="FR" origin_xyz="0.068122 -0.0024607 -0.13369" mass="0.2" filename="package://spotdog/meshes/FR_lower_hip.STL"/>
+    <xacro:lower_hip name="BR" origin_xyz="0.06812 -0.0024607 -0.13369" mass="0.2" filename="package://spotdog/meshes/BR_lower_hip.STL"/>
+    <xacro:lower_hip name="FL" origin_xyz="0.06798 0.0025364 -0.13341" mass="0.2" filename="package://spotdog/meshes/FL_lower_hip.STL"/>
+    <xacro:lower_hip name="BL" origin_xyz="0.067979 0.0025364 -0.13341" mass="0.2" filename="package://spotdog/meshes/BL_lower_hip.STL"/>
+
+
+    <xacro:lower_knee name="FR" origin_xyz="-0.073022 0.0025629 -0.071618" mass="0.2" filename="package://spotdog/meshes/FR_lower_knee.STL"/>
+    <xacro:lower_knee name="BR" origin_xyz="-0.07302 0.0025629 -0.07162" mass="0.2" filename="package://spotdog/meshes/BR_lower_knee.STL"/>
+    <xacro:lower_knee name="FL" origin_xyz="-0.073022 -0.0025629 -0.071618"  mass="0.2" filename="package://spotdog/meshes/FL_lower_knee.STL"/>
+    <xacro:lower_knee name="BL" origin_xyz="-0.07302 -0.0025629 -0.07162" mass="0.2" filename="package://spotdog/meshes/BL_lower_knee.STL"/>
+
+    <xacro:joint_to_joint jointname="base_to_fr_upper_hip" type="revolute" origin_xyz="0.19911 -0.1735 0.0074919" parent_link="BASE" child_link="FR_upper_hip"/>
+    <xacro:joint_to_joint jointname="base_to_br_upper_hip" type="revolute" origin_xyz="-0.246888764816864 -0.173500351164099 0.00749192202338655" parent_link="BASE" child_link="BR_upper_hip"/>
+    <xacro:joint_to_joint jointname="base_to_fl_upper_hip" type="revolute" origin_xyz="0.199111235183205 0.173499648835901 0.00749192202384069" parent_link="BASE" child_link="FL_upper_hip"/>
+    <xacro:joint_to_joint jointname="base_to_bl_upper_hip" type="revolute" origin_xyz="-0.24689 0.1735 0.0074919" parent_link="BASE" child_link="BL_upper_hip"/>
+
+    <xacro:joint_to_joint jointname="base_to_fr_upper_knee" type="revolute" origin_xyz="0.24911 -0.1735 0.0074919" parent_link="BASE" child_link="FR_upper_knee"/>
+    <xacro:joint_to_joint jointname="base_to_br_upper_knee" type="revolute" origin_xyz="-0.19689 -0.1735 0.0074919"  parent_link="BASE" child_link="BR_upper_knee"/>
+    <xacro:joint_to_joint jointname="base_to_fl_upper_knee" type="revolute" origin_xyz="0.249111235183415 0.173499648835901 0.0074919220240201" parent_link="BASE" child_link="FL_upper_knee"/>
+    <xacro:joint_to_joint jointname="base_to_bl_upper_knee" type="revolute" origin_xyz="-0.196888764816585 0.173499648835901 0.00749192202401999" parent_link="BASE" child_link="BL_upper_knee"/>
+
+    <xacro:joint_to_joint jointname="FR_upper_hip_to_lower_hip" type="revolute" origin_xyz="-0.1035 -0.01 -0.037247" parent_link="FR_upper_hip" child_link="FR_lower_hip"/>
+    <xacro:joint_to_joint jointname="BR_upper_hip_to_lower_hip" type="revolute" origin_xyz="-0.103499423252635 -0.0100000000000007 -0.0372541190514647" parent_link="BR_upper_hip" child_link="BR_lower_hip"/>
+    <xacro:joint_to_joint jointname="FL_upper_hip_to_lower_hip" type="revolute" origin_xyz="-0.103501820756454 0.0100000000000031 -0.0372474576318325" parent_link="FL_upper_hip" child_link="FL_lower_hip"/>
+    <xacro:joint_to_joint jointname="BL_upper_hip_to_lower_hip" type="revolute" origin_xyz="-0.1035 0.01 -0.037254" parent_link="BL_upper_hip" child_link="BL_lower_hip"/>
+
+    <xacro:joint_to_joint jointname="FR_upper_knee_to_lower_knee" type="revolute" origin_xyz="0.080087 -0.008 -0.075406" parent_link="FR_upper_knee" child_link="FR_lower_knee"/>
+    <xacro:joint_to_joint jointname="BR_upper_knee_to_lower_knee" type="revolute" origin_xyz="0.080084 -0.008 -0.075409" parent_link="BR_upper_knee" child_link="BR_lower_knee"/>
+    <xacro:joint_to_joint jointname="FL_upper_knee_to_lower_knee" type="revolute" origin_xyz="0.0800874913210537 0.00799999999999891 -0.0754055285368097" parent_link="FL_upper_knee" child_link="FL_lower_knee"/>
+    <xacro:joint_to_joint jointname="BL_upper_knee_to_lower_knee" type="revolute" origin_xyz="0.080084 0.008 -0.075409" parent_link="BL_upper_knee" child_link="BL_lower_knee"/>
+
+    <gazebo>
+        <joint name="FR_lower_hip_to_lower_knee" type="revolute">
+            <parent>FR_lower_hip</parent>
+            <child>FR_lower_knee</child>
+            <axis>
+                <xyz>1 0 0</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame>1</use_parent_model_frame>
+            </axis>
+        </joint>
+        
+        <joint name="BR_lower_hip_to_lower_knee" type="revolute">
+            <parent>BR_lower_hip</parent>
+            <child>BR_lower_knee</child>
+            <axis>
+                <xyz>1 0 0</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame>1</use_parent_model_frame>
+            </axis>
+        </joint>
+
+        <joint name="FL_lower_hip_to_lower_knee" type="revolute">
+            <parent>FL_lower_hip</parent>
+            <child>FL_lower_knee</child>
+            <axis>
+                <xyz>1 0 0</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame>1</use_parent_model_frame>
+            </axis>
+        </joint>
+
+        <joint name="BL_lower_hip_to_lower_knee" type="revolute">
+            <parent>BL_lower_hip</parent>
+            <child>BL_lower_knee</child>
+            <axis>
+                <xyz>1 0 0</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                </dynamics>
+                <use_parent_model_frame>1</use_parent_model_frame>
+            </axis>
+        </joint>
+        
+    </gazebo>
+
+    <xacro:transmission name="FR_hip_trans" joint_name="base_to_fr_upper_hip" actuator_name="trans_1"/>
+    <xacro:transmission name="BR_hip_trans" joint_name="base_to_br_upper_hip" actuator_name="trans_2"/>
+    <xacro:transmission name="FL_hip_trans" joint_name="base_to_fl_upper_hip" actuator_name="trans_3"/>
+    <xacro:transmission name="BL_hip_trans" joint_name="base_to_bl_upper_hip" actuator_name="trans_4"/>
+
+    <xacro:transmission name="FR_knee_trans" joint_name="base_to_fr_upper_knee" actuator_name="trans_5"/>
+    <xacro:transmission name="BR_knee_trans" joint_name="base_to_br_upper_knee" actuator_name="trans_6"/>
+    <xacro:transmission name="FL_knee_trans" joint_name="base_to_fl_upper_knee" actuator_name="trans_7"/>
+    <xacro:transmission name="BL_knee_trans" joint_name="base_to_bl_upper_knee" actuator_name="trans_8"/>
+
+    <gazebo>
+        <plugin name='gazebo_ros_control' filename= 'libgazebo_ros_control.so'>
+          <robotNamespace>/spotdog</robotNamespace>
+          <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        </plugin>
+      </gazebo>
+    
+</robot>

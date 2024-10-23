@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Include the Gazebo empty world launch file -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+    <!-- Load the robot description -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find spotdog)/xacro/model/spotdog.xacro"/>
+
+    <!-- Spawn the model in Gazebo -->
+    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" 
+          args="-param robot_description -urdf -model spotdog" 
+          output="screen"/>
+
+      <!--Tai thong so config-->
+      <rosparam command="load" file="$(find spotdog)/config/config_xacro.yaml"/>  
+    
+      <node pkg="controller_manager" type="controller_manager" name="controller_manager" ns="/spotdog" />
+      <!--Tao ra bo dieu khien chung de khoi dong cac bo dieu khien-->
+      <node name='controller_spawner' pkg='controller_manager' type='spawner' respawn='false' 
+          output='screen' ns='/spotdog' args='fr_hip_controller br_hip_controller
+                                              fl_hip_controller bl_hip_controller
+                                              fr_knee_controller br_knee_controller
+                                              fl_knee_controller bl_knee_controller
+                                              joint_state_controller'/>
+      <!--Khoi dong node xuat ban trang thai-->
+      <node name='robot_state_publisher' pkg='robot_state_publisher' type='robot_state_publisher'
+              output='screen' respawn='false'>
+              <remap from="/joint_states" to="/spotdog/joint_states"/>
+      </node>
+          
+</launch>
